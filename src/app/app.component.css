@@ -1,0 +1,26 @@
+.Btn_Section {
+    width: 100%;
+}
+.font_size {
+    font-size: 20px;
+    padding: 5px 0px;
+    border-bottom: 1px solid black;
+}
+
+.topBtn {
+    margin-left: 15px;
+    font-size: 20px;
+    margin-right: 10px;
+}
+.pointer {
+    cursor: pointer;
+    text-decoration: none;
+
+}
+
+.footer_Style{
+    position: relative;
+    top: -1px;
+    padding: 20px 0px;
+    border: 2px solid black;
+}

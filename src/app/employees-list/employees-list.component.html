@@ -1,0 +1,99 @@
+<div class="main_contain_area bordertwoPx d-flex">
+    <!-- <div class="row"> -->
+    <div class="Main_section float-end">
+        <div class="Search_section">
+            <input class="margin" type="text" [(ngModel)]="SearchForName" placeholder="Name">
+            <input class="margin" type="text" [(ngModel)]="SearchForDateOfBirth" placeholder="Date Of Birth">
+            <input class="margin" type="text" [(ngModel)]="SearchForEmail" placeholder="Email">
+            <input class="margin" type="text" [(ngModel)]="SearchForMobile" placeholder="Mobile">
+            <i class="bi bi-search"></i>
+        </div>
+        <div class="Table_section">
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th>Photo</th>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Mobile</th>
+                        <th>Date Of Birth</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="col-md-12"
+                        *ngFor="let PostItem of EmployeeList | filter:SearchForEmail | filter:SearchForMobile">
+                        <td><img class="ProductImage" [src]="'data:image/jpg;base64,'+PostItem.image" alt="Image"></td>
+                        <td class="align-self-center">{{PostItem.firstName +" "+ PostItem.LastName | uppercase}}</td>
+                        <td class="align-self-center">{{PostItem.email}}</td>
+                        <td>{{PostItem.mobile}}</td>
+                        <td>{{PostItem.dateOfBirth | date}}</td>
+                        <td><i (click)="EditEmployee(PostItem)" class="Eicon bi bi-pencil-square"> </i> <i
+                                (click)="DeletedEmployee(PostItem)" class="Eicon bi bi-trash-fill"></i></td>
+                    </tr>
+                </tbody>
+                <tfoot class="footer_Style">
+                    <tr>
+                        <td colspan="6">
+                            <div class="float-start"> Showing {{oEmployeeResponseDto.pageNo}} to
+                                {{(oEmployeeResponseDto.pageNo - 1) * oEmployeeResponseDto.pageSize +
+                                oEmployeeResponseDto.items.length}}
+                                out of {{oEmployeeResponseDto.totalItems}}</div>
+                            <div class="float-end">
+                                <div class="pagination_section">
+                                    <div class="pagination">
+                                        <!-- Previous Button -->
+                                        <li [class.disabled]="oEmployeeResponseDto.pageNo === 1">
+                                            <a class="pointerd"
+                                                (click)="onPageChange(oEmployeeResponseDto.pageNo - 1)"><span>&laquo;</span></a>
+                                        </li>
+                                        <!-- Page Numbers -->
+                                        <li *ngFor="let page of pagesArray"
+                                            [class.active]="page === oEmployeeResponseDto.pageNo">
+                                            <a class="pointerd" (click)="onPageChange(page)">{{ page }}</a>
+                                        </li>
+                                        <!-- Next Button -->
+                                        <li
+                                            [class.disabled]="oEmployeeResponseDto.pageNo === oEmployeeResponseDto.totalPages">
+                                            <a class="pointerd"
+                                                (click)="onPageChange(oEmployeeResponseDto.pageNo + 1)"><span>&raquo;</span></a>
+                                        </li>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" id="ConframDeletedModal" hidden data-bs-toggle="modal"
+    data-bs-target="#exampleModalconfirm">
+    Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalconfirm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Employee</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-0">
+                    <div class="col-12 text-center h3">Are you sure, you want to delete this?</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="DeletedClose" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                <button type="button" (click)="deleteConfirm()" class="btn btn-primary">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>

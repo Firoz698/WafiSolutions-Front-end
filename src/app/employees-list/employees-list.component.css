@@ -1,0 +1,88 @@
+/* manu containe style here */
+.Main_section {
+    width: 100%;
+}
+
+tbody {
+    vertical-align: middle;
+}
+
+.borderOnePx {
+    border: 1px solid black !important;
+}
+
+.Table_section {
+    margin: 26px 30px;
+}
+
+
+.ProductImage {
+    height: 45px;
+    width: 45px;
+}
+
+.Search_section {
+    border-radius: 20px;
+    margin: 15px 30px;
+    border: 1px solid black;
+    padding: 15px;
+}
+
+
+
+/* main contanet style here */
+
+.bi-search {
+    font-size: 24px;
+    margin-left: 69px;
+}
+
+.bi-trash-fill {
+    margin-left: 30px;
+}
+
+.margin {
+    height: 33px;
+    font-size: 16px;
+    width: 311px;
+    margin-right: 30px;
+    padding-left: 15px;
+}
+
+.Eicon {
+    font-size: 25px;
+}
+
+
+.footer_area p {
+    margin-top: 50px;
+}
+
+.main_contain_area {
+    height: 848px;
+}
+
+.pointerd {
+    text-decoration: none;
+    cursor: pointer;
+    color: gray;
+}
+
+.pointerd :hover {
+    color: black;
+}
+
+/* Footer Area  */
+
+.pagination li {
+    padding: 0px 12px;
+}
+
+.pagination {
+    padding: 0px !important;
+}
+
+.footer_Style {
+
+    padding: 0px;
+}

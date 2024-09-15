@@ -1,0 +1,61 @@
+<div class="main_contain_area">
+    <div class="card">
+        <div class="card-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">{{id==0?'Add Employee':'Update Employee'}}</h1>
+        </div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-12">
+                    <div class="row g-0">
+                        <div class="col-md-10">
+                            <div class="row g-0 was-validated">
+                                <div class=" col-md-6 mb-3 px-2">
+                                    <label for="inputEmail4" class="form-label">FirstName</label>
+                                    <input type="text" class="form-control" id="inputEmail4" placeholder="First Name"
+                                        [(ngModel)]="employee.firstName" name="FirstName" required>
+                                </div>
+                                <div class=" col-md-6 mb-3 px-2">
+                                    <label for="inputPassword4" class="form-label">LastName</label>
+                                    <input type="text" class="form-control" id="inputPassword4" placeholder="Last Name"
+                                        [(ngModel)]="employee.lastName" name="LastName" required>
+                                </div>
+                                <div class=" col-md-6 mb-3 px-2">
+                                    <label for="inputAddress" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="inputAddress" placeholder="Email"
+                                        [(ngModel)]="employee.email" name="Email" required>
+                                </div>
+                                <div class=" col-md-6 mb-3 px-2">
+                                    <label for="inputDate" class="form-label">Date Of Birth</label>
+                                    <input type="date" class="form-control" id="inputDate" [(ngModel)]="dateOfBirth"
+                                     name="dateOfBirth" required>
+                                </div>
+                                <div class=" col-md-6 mb-3 px-2">
+                                    <label for="inputAddress2" class="form-label">Employee Mobile</label>
+                                    <input type="text" class="form-control" id="inputAddress2" placeholder="Mobile Numebr"
+                                        [(ngModel)]="employee.mobile" name="Mobile" required>
+                                </div>
+                                <div class="col-md-6 mb-3 px-2">
+                                    <label for="formFile" class="form-label">Employee Image</label>
+                                    <input class="form-control" [(ngModel)]="image" type="file" id="formFile"
+                                        (change)="ImageUploadMethod($event)" required>
+                                        <div class="invalid-feedback">Example invalid form file feedback</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <img class="imageSize" [src]="'data:image/jpg;base64,'+employee.image" alt="Image">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="card-footer p-3">
+            <button type="button" routerLink="/employees" class="btn btn-secondary">Back To List</button>
+            <button type="submit" class="btn btn-primary float-end" *ngIf="id==0" (click)="AddEmployee()">Add
+                Employee</button>
+            <button type="button" class="btn btn-success float-end" *ngIf="id>0" (click)="UpdateEmployee()">Update
+                Employee</button>
+        </div>
+    </div>
+</div>
