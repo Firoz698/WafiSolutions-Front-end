@@ -2,11 +2,11 @@
     <!-- <div class="row"> -->
     <div class="Main_section float-end">
         <div class="Search_section">
-            <input class="margin" type="text" [(ngModel)]="SearchForName" placeholder="Name">
-            <input class="margin" type="text" [(ngModel)]="SearchForDateOfBirth" placeholder="Date Of Birth">
-            <input class="margin" type="text" [(ngModel)]="SearchForEmail" placeholder="Email">
-            <input class="margin" type="text" [(ngModel)]="SearchForMobile" placeholder="Mobile">
-            <i class="bi bi-search"></i>
+            <input class="margin" type="text" [(ngModel)]="oEmployeeFilter.name" name="name" placeholder="Name">
+            <input class="margin" type="date" [(ngModel)]="filterDateOfBirth" name="filterDateOfBirth"  placeholder="Date Of Birth">
+            <input class="margin" type="text" [(ngModel)]="oEmployeeFilter.email" name="email" placeholder="Email">
+            <input class="margin" type="text" [(ngModel)]="oEmployeeFilter.mobile" name="mobile" placeholder="Mobile">
+            <i class="bi bi-search" (click)="filter()"></i>
         </div>
         <div class="Table_section">
             <table class="table table-bordered text-center">
@@ -22,14 +22,14 @@
                 </thead>
                 <tbody>
                     <tr class="col-md-12"
-                        *ngFor="let PostItem of EmployeeList | filter:SearchForEmail | filter:SearchForMobile">
-                        <td><img class="ProductImage" [src]="'data:image/jpg;base64,'+PostItem.image" alt="Image"></td>
-                        <td class="align-self-center">{{PostItem.firstName +" "+ PostItem.LastName | uppercase}}</td>
-                        <td class="align-self-center">{{PostItem.email}}</td>
-                        <td>{{PostItem.mobile}}</td>
-                        <td>{{PostItem.dateOfBirth | date}}</td>
-                        <td><i (click)="EditEmployee(PostItem)" class="Eicon bi bi-pencil-square"> </i> <i
-                                (click)="DeletedEmployee(PostItem)" class="Eicon bi bi-trash-fill"></i></td>
+                        *ngFor="let item of FilterEmployeeList">
+                        <td><img class="ProductImage" [src]="'data:image/jpg;base64,'+item.image" alt="Image"></td>
+                        <td class="align-self-center">{{item.firstName +" "+ item.lastName | uppercase}}</td>
+                        <td class="align-self-center">{{item.email}}</td>
+                        <td>{{item.mobile}}</td>
+                        <td>{{item.dateOfBirth | date}}</td>
+                        <td><i (click)="EditEmployee(item)" class="Eicon bi bi-pencil-square"> </i> <i
+                                (click)="DeletedEmployee(item)" class="Eicon bi bi-trash-fill"></i></td>
                     </tr>
                 </tbody>
                 <tfoot class="footer_Style">

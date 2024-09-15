@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiServiceService } from '../HttpService/api-service.service';
 import { Employee, EmployeeFilter, EmployeeResponseDto } from '../Models/Employee';
 import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-employees-list',
@@ -10,18 +11,25 @@ import { Router } from '@angular/router';
 })
 export class EmployeesListComponent implements OnInit {
   public EmployeeList: any[] = [];
+  public FilterEmployeeList: any[] = [];
   employee = new Employee();
   oEmployeeFilter = new EmployeeFilter();
   oEmployeeResponseDto = new EmployeeResponseDto();
   pagesArray: number[] = [];
+  filterDateOfBirth: string = "";
   id: number = -1;
   Image: any;
   SearchForEmail: string = "";
   SearchForMobile: string = "";
   SearchForDateOfBirth: string = "";
   SearchForName: string = "";
-  constructor(private Services: ApiServiceService, private router: Router) { }
+  constructor(private Services: ApiServiceService, private datepipe:DatePipe, private router: Router) { }
   ngOnInit() {
+    this.getrequest();
+  }
+
+
+  filter() {
     this.getrequest();
   }
 
@@ -56,14 +64,34 @@ export class EmployeesListComponent implements OnInit {
     document.getElementById('ModalClose')?.click();
   }
   getrequest() {
+    debugger
+    this.filterDateOfBirth
+    this.oEmployeeFilter.dateOfBirth = this.datepipe.transform(this.filterDateOfBirth, 'yyyy-MM-dd') ?? '';
     this.Services.GetEmployee(this.oEmployeeFilter).subscribe(
       (response: any) => {
+        debugger
         this.EmployeeList = response.items;
+        this.FilterEmployeeList = response.items;
         this.oEmployeeResponseDto = response;
-        this.pagesArray = Array.from({ length: response.totalPages }, (v, k) => k + 1); // Array of pages
+        this.pagesArray = Array.from({ length: response.totalPages }, (v, k) => k + 1); 
         console.log(response);
       }
     )
+  }
+
+  public InterFaceSearch() {
+    debugger
+    this.FilterEmployeeList = this.EmployeeList;
+    if (this.SearchForName != "") {
+      this.FilterEmployeeList = this.FilterEmployeeList.filter(c => (c.firstName + " " + c.lastName).toLowerCase().indexOf(this.SearchForName.toLowerCase()) > -1)
+    }
+    if (this.SearchForEmail != "") {
+      this.FilterEmployeeList = this.FilterEmployeeList.filter(c => c.email.toLowerCase().indexOf(this.SearchForEmail.toLowerCase()) > -1)
+    }
+    if (this.SearchForMobile != "") {
+      this.FilterEmployeeList = this.FilterEmployeeList.filter(c => c.mobile.toLowerCase().indexOf(this.SearchForMobile.toLowerCase()) > -1)
+    }
+
   }
 
   // Handle page change

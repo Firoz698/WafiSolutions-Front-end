@@ -24,14 +24,14 @@ export class EmployeeFilter {
         this.name = "";
         this.email = "";
         this.mobile = "";
-        this.dateOfBirth = new Date();
+        this.dateOfBirth = "";
     }
     pageNo: number;
     pageSize: number;
     name: string;
     email: string;
     mobile: string;
-    dateOfBirth: Date;
+    dateOfBirth: string;
 }
 export class EmployeeResponseDto {
     constructor() {

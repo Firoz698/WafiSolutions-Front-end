@@ -27,16 +27,16 @@ export class AddEmployeeComponent implements OnInit {
       this.employee.firstName = "";
       this.employee = new Employee();
       const myDate = new Date();
-      this.dateOfBirth = this.datepipe.transform(myDate, 'yyyy-MM-dd');
+      this.dateOfBirth =this.datepipe.transform(myDate, 'yyyy-MM-dd');
     }
 
   }
   GetEmployeeById(id: number) {
     this.Services.GetEmployeeById(id).subscribe(
       (response: any) => {
-        debugger
         this.employee = response;
-        this.datepipe.transform(response.dateOfBirth, 'yyyy-MM-dd');
+
+        this.dateOfBirth =  this.datepipe.transform(response.dateOfBirth, 'yyyy-MM-dd');
       }, (err: any) => {
         console.log(err)
       }
